@@ -15,22 +15,23 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 
 public class TestListener implements ITestListener {
+    private static final Logger LOG = LogManager.getLogger(TestListener.class);
+
     private ByteArrayOutputStream request = new ByteArrayOutputStream();
     private ByteArrayOutputStream response = new ByteArrayOutputStream();
 
     private PrintStream requestVar = new PrintStream(request, true);
     private PrintStream responseVar = new PrintStream(response, true);
 
-    private static final Logger LOG = LogManager.getLogger(TestListener.class);
 
     public void onTestStart(ITestResult result) {
-        LOG.info("Test method: '"+ result.getMethod().getMethodName() + "' - Started");
+        LOG.info("Test method: '" + result.getMethod().getMethodName() + "' - Started");
         RestAssured.filters(new ResponseLoggingFilter(LogDetail.ALL, responseVar),
                 new RequestLoggingFilter(LogDetail.ALL, requestVar));
     }
 
     public void onTestSuccess(ITestResult result) {
-        LOG.info("Test method: '"+ result.getMethod().getMethodName() + "' - Passed");
+        LOG.info("Test method: '" + result.getMethod().getMethodName() + "' - Passed");
     }
 
     public void onTestFailure(ITestResult result) {
@@ -46,12 +47,12 @@ public class TestListener implements ITestListener {
     }
 
     public void onStart(ITestContext context) {
-        LOG.info("=========== onStart : test name : '" + context.getName() + "' ===============");
+        LOG.info("=========== Test Start : test name : '" + context.getName() + "' ===============");
 
     }
 
     public void onFinish(ITestContext context) {
-        LOG.info("=========== onFinish : test name : '" + context.getName() + "' ===============");
+        LOG.info("=========== Test Finish : test name : '" + context.getName() + "' ===============");
 
     }
 }
