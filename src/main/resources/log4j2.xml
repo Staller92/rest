@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <properties>
+        <property name="pattern">%d{HH:mm:ss} %-5p [%t] – %-60m%n</property>
+    </properties>
+    <Appenders>
+        <File name="File" fileName="target/logs/appTest.log">
+            <PatternLayout pattern="${pattern}"/>
+        </File>
+        <Console name="Console">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="trace">
+            <appenderRef ref="File"/>
+            <appenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
+
